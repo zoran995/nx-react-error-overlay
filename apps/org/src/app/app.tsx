@@ -1,9 +1,14 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import styles from './app.module.scss';
+import { useEffect } from 'react';
 
 import NxWelcome from './nx-welcome';
 
 export function App() {
+  useEffect(() => {
+    setTimeout(() => {
+      throw new Error('test');
+    }, 1000);
+  }, []);
   return (
     <div>
       <NxWelcome title="org" />
