@@ -43,7 +43,8 @@
         "buildTarget": "org:build",
         "hmr": true,
         "port": 3000,
-        "open": true
+        "open": true,
+        "allowedHosts": "all"
       },
       "configurations": {
         "development": {
