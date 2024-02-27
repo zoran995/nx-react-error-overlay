@@ -3,6 +3,54 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/org/src",
   "projectType": "application",
-  "targets": {},
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "tsConfig": "apps/org/tsconfig.app.json",
+        "compiler": "babel",
+        "main": "apps/org/src/main.tsx",
+        "index": "apps/org/src/index.html",
+        "baseHref": "/",
+        "assets": ["./apps/org/src/favicon.ico", "./apps/org/src/assets"],
+        "styles": ["./apps/org/src/styles.scss"],
+        "outputPath": "dist/apps/org",
+        "webpackConfig": "apps/org/webpack.config.ts"
+      },
+      "configurations": {
+        "development": {
+          "optimization": false,
+          "outputHashing": "none",
+          "extractLicenses": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/webpack:dev-server",
+      "options": {
+        "buildTarget": "org:build",
+        "hmr": true,
+        "port": 3000,
+        "open": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "org:build:development"
+        }
+      }
+    }
+  },
   "tags": []
 }
